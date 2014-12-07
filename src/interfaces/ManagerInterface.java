@@ -1,6 +1,12 @@
 package interfaces;
 import java.util.ArrayList;
-import app.*;
+import java.util.Date;
+
+import app.Guest;
+import app.GuestReservation;
+import app.Reservation;
+import app.Room;
+import app.RoomReservation;
 
 public interface ManagerInterface
 {
@@ -18,4 +24,7 @@ public interface ManagerInterface
 	public abstract void editReservation();
 	public abstract void cancelReservation();
 	public abstract void newGuest();
+	public abstract void checkIfRoomFree(int roomId, Date checkInDate, Date checkOutDate);
+	public abstract double getReservationPrice(Reservation reservation);
+	
 }

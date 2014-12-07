@@ -1,32 +1,18 @@
-import java.util.ArrayList;
+import interfaces.RoomInterface;
 
-public class Room {
+public class Room implements RoomInterface {
 
-	private ArrayList<Reservation> reservations;
 
-	private String name;
+	private String type;
 	private int roomCapacity;
-	private int roomPricePerPerson;
+	private double roomPricePerPerson;
 	private int roomNumber;
 
-	public Room(String roomName, int roomCapacity, int roomPricePerPerson) {
-		this.name = roomName;
+	public Room(String roomType, int roomCapacity, double roomPricePerPerson) {
+		this.type = roomType;
 		this.roomCapacity = roomCapacity;
 		this.roomPricePerPerson = roomPricePerPerson;
-		this.reservations = new ArrayList<Reservation>();
 		this.roomNumber = 0;
-	}
-
-	public void addReservation(Reservation reservation) {
-		reservations.add(reservation);
-	}
-
-	public void deleteReservation(Reservation reservation) {
-		reservations.remove(reservation);
-	}
-
-	public ArrayList<Reservation> getReservations() {
-		return reservations;
 	}
 
 	public void setRoomNumber(int number) {
@@ -37,12 +23,12 @@ public class Room {
 		return this.roomNumber;
 	}
 	
-	public String getName() {
-		return name;
+	public String getType() {
+		return type;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setType(String name) {
+		this.type = name;
 	}
 
 	public int getRoomCapacity() {
@@ -53,7 +39,7 @@ public class Room {
 		this.roomCapacity = roomCapacity;
 	}
 
-	public int getRoomPricePerPerson() {
+	public double getRoomPricePerPerson() {
 		return roomPricePerPerson;
 	}
 
@@ -61,18 +47,7 @@ public class Room {
 		this.roomPricePerPerson = roomPricePerPerson;
 	}
 
-	public void setReservations(ArrayList<Reservation> reservations) {
-		this.reservations = reservations;
-	}
-
-	public void delete() {
-		for (int i = reservations.size(); i >= 0; i--) {
-			Reservation res = reservations.get(i);
-			res.deleteReservation();
-		}
-	}
-
 	public String toString(){
-		return super.toString() + " " + roomNumber + ": " + name + ". Can hold: " + roomCapacity + ". Price per person sharing: " + roomPricePerPerson;
+		return super.toString() + " " + roomNumber + ": " + type + ". Can hold: " + roomCapacity + ". Price per person sharing: " + roomPricePerPerson;
 	}
 }

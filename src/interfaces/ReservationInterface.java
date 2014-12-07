@@ -9,8 +9,7 @@ public interface ReservationInterface
 	public abstract Date getReservationDate();
 	public abstract Date getCheckInDate();
 	public abstract Date getCheckOutDate();
-	public abstract void setReservationDate();
-	public abstract void setCheckInDate();
-	public abstract void setCheckOutDate();
-	public abstract double calculateNetPrice(RoomReservation[] reservations);
+	public abstract void setReservationDate(Date newReservationDate);
+	public abstract void setCheckInDate(Date newCheckInDate);
+	public abstract void setCheckOutDate(Date newcheckOutDate);
 }
