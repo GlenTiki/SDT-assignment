@@ -4,6 +4,6 @@ public interface GuestReservationInterface
 {
 	public abstract int getGuestId();
 	public abstract int getReservationId();
-	public abstract void setGuestId();
-	public abstract void setReservationId();
+	public abstract void setGuestId(int guestId);
+	public abstract void setReservationId(int reservationId);
 }

@@ -1,46 +1,80 @@
-import java.util.ArrayList;
+import interfaces.GuestInterface;
 
-
-public class Guest {
+public class Guest implements GuestInterface {
 	
+	private static int NEXT_GUEST_ID = 0;
+	
+	private int id;
 	private String name;
+	private String phoneNumber;
+	private String address;
+	private String email;
 
-	private ArrayList<Reservation> reservations;
-	
-	public Guest(String name){
+	public Guest(String name, String phoneNumber, String address, String email){
 		this.name = name;
-		this.reservations = new ArrayList<Reservation>();
-	}
-
-	public void addReservation(Reservation reservation) {
-		reservations.add(reservation);
-	}
-
-	public void deleteReservation(Reservation reservation) {
-		reservations.remove(reservation);	
+		this.phoneNumber = phoneNumber;
+		this.address = address;
+		this.email = email;
+		this.id = getNewGuestID();
 	}
 	
+	public int getNewGuestID(){
+		return NEXT_GUEST_ID++;
+	}
+
+	@Override
+	public boolean matchDetails(String name, String phoneNumber, String address, String email) {
+		return this.name == name && this.phoneNumber == phoneNumber && this.address == address && this.email == email;
+	}
+	
+	@Override
+	public int getId() {
+		return id;
+	}
+
+	@Override
+	public void setId(int newID) {
+		this.id = newID;
+	}
+
+	@Override
 	public String getName() {
 		return name;
 	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public void setReservations(ArrayList<Reservation> reservations) {
-		this.reservations = reservations;
-	}
-
-	public ArrayList<Reservation> getReservations(){
-		return reservations;
+	
+	@Override
+	public void setName(String newName) {
+		this.name = newName;
 	}
 	
-	public void delete(){
-		for (int i = reservations.size(); i >= 0; i--) {
-			Reservation res = reservations.get(i);
-			res.deleteReservation();
-		}
+	@Override
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+
+	@Override
+	public void setPhoneNumber(String newPhoneNumber) {
+		this.phoneNumber = newPhoneNumber;		
+	}
+
+	@Override
+	public String getAddress() {
+		return address;
+	}
+
+	@Override
+	public void setAddress(String newAddress) {
+		this.address = newAddress;
+	}
+
+	@Override
+	public String getEmail() {
+		return email;
+	}
+	
+	@Override
+	public void setEmail(String newEmail) {
+		this.email = newEmail;
 	}
 
 }

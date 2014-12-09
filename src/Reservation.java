@@ -1,90 +1,67 @@
-import java.util.ArrayList;
+import interfaces.ReservationInterface;
+
 import java.util.Date;
 
+import app.RoomReservation;
 
-public class Reservation {
+
+public class Reservation implements ReservationInterface {
 	
-	private int reservationNumber;
+	private static int NEXT_RESERVATION_ID = 0;
 	
-	private ArrayList<Room> rooms;
-	private Guest guest;
+	private int reservationId;
+	
+	private Date reservationDate;
 	
 	private Date checkInDate;
 	private Date checkOutDate;
 	
-	public Reservation(int number, Guest guest, Room[] rooms, Date checkIn, Date checkOut){
-		this.reservationNumber = number;
-		
-		this.guest = guest;
-		this.rooms = new ArrayList<Room>(java.util.Arrays.asList(rooms));
+	public Reservation( Date checkIn, Date checkOut){
+		this.reservationId = getNewGuestID();
 		
 		this.checkInDate = checkIn;
 		this.checkOutDate = checkOut;
-		
-		updateRefs();
 	}
 	
-	private void updateRefs(){
-		guest.addReservation(this);
-		for(Room room: rooms){
-			room.addReservation(this);
-		}
-	}
-	
-	public void deleteReservation(){
-		guest.deleteReservation(this);
-		for(Room room: rooms){
-			room.deleteReservation(this);
-		}
-	}
-	
-	public Guest getGuest(){
-		return guest;
-	}
-	
-	public ArrayList<Room> getRooms(){
-		return rooms;
-	}
-	
-	public void setGuest(Guest guest){
-		this.guest.deleteReservation(this);
-		this.guest = guest;
-		this.guest.addReservation(this);
-	}
-	
-	public void setRooms(ArrayList<Room> rooms){
-		this.rooms = rooms;
-	}
-	
-	public void addRoom(Room room){
-		this.rooms.add(room);
-		room.addReservation(this);
-	}
-	
-	public void removeRoom(Room room){
-		this.rooms.remove(room);
-		room.deleteReservation(this);
+	public int getNewGuestID(){
+		return NEXT_RESERVATION_ID++;
 	}
 
-	
-	public int getReservationNumber() {
-		return reservationNumber;
+	@Override
+	public int getId() {
+		return this.reservationId;
 	}
 
+	@Override
+	public Date getReservationDate() {
+		return this.reservationDate;
+	}
+
+	@Override
 	public Date getCheckInDate() {
-		return checkInDate;
+		return this.checkInDate;
 	}
 
-	public void setCheckInDate(Date checkInDate) {
-		this.checkInDate = checkInDate;
-	}
-
+	@Override
 	public Date getCheckOutDate() {
-		return checkOutDate;
+		return this.checkOutDate;
 	}
 
-	public void setCheckOutDate(Date checkOutDate) {
-		this.checkOutDate = checkOutDate;
+	@Override
+	public void setReservationDate(Date newReservationDate) {
+		this.reservationDate = newReservationDate;
+		
 	}
 
+	@Override
+	public void setCheckInDate(Date newCheckInDate) {
+		this.checkInDate = newCheckInDate;
+		
+	}
+
+	@Override
+	public void setCheckOutDate(Date newCheckOutDate) {
+		this.checkOutDate = newCheckOutDate;
+		
+	}
 }
