@@ -5,7 +5,6 @@ import interfaces.GuestReservationInterface;
 
 public class GuestReservation implements GuestReservationInterface
 {
-
 	private int guestId;
 	private int reservationId;
 	

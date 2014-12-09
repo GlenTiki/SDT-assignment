@@ -3,7 +3,7 @@ import interfaces.GuestInterface;
 
 public class Guest implements GuestInterface {
 	
-	private static int NEXT_GUEST_ID = 0;
+	
 	
 	private int id;
 	private String name;
@@ -11,16 +11,12 @@ public class Guest implements GuestInterface {
 	private String address;
 	private String email;
 
-	public Guest(String name, String phoneNumber, String address, String email){
+	public Guest(int id, String name, String phoneNumber, String address, String email){
+		this.id = id;
 		this.name = name;
 		this.phoneNumber = phoneNumber;
 		this.address = address;
 		this.email = email;
-		this.id = getNewGuestID();
-	}
-	
-	public int getNewGuestID(){
-		return NEXT_GUEST_ID++;
 	}
 
 	@Override
@@ -33,10 +29,6 @@ public class Guest implements GuestInterface {
 		return id;
 	}
 
-	@Override
-	public void setId(int newID) {
-		this.id = newID;
-	}
 
 	@Override
 	public String getName() {
@@ -45,6 +37,7 @@ public class Guest implements GuestInterface {
 	
 	@Override
 	public void setName(String newName) {
+		if (!newName.isEmpty())
 		this.name = newName;
 	}
 	
@@ -55,6 +48,7 @@ public class Guest implements GuestInterface {
 
 	@Override
 	public void setPhoneNumber(String newPhoneNumber) {
+		if (!newPhoneNumber.isEmpty())
 		this.phoneNumber = newPhoneNumber;		
 	}
 
@@ -65,6 +59,7 @@ public class Guest implements GuestInterface {
 
 	@Override
 	public void setAddress(String newAddress) {
+		if (!newAddress.isEmpty())
 		this.address = newAddress;
 	}
 
@@ -75,6 +70,7 @@ public class Guest implements GuestInterface {
 	
 	@Override
 	public void setEmail(String newEmail) {
+		if (!newEmail.isEmpty())
 		this.email = newEmail;
 	}
 

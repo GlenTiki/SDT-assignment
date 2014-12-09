@@ -36,13 +36,10 @@ public class RoomReservation implements RoomReservationInterface
 		this.roomNumber = roomNumber;
 	}
 
-	@Override
-	public void setReservationId(int reservationId) {
-		this.reservationId = reservationId;
-	}
 
 	@Override
 	public void setNumGuests(int numGuests) {
-		this.numGuests = numGuests;
+		if (numGuests > 0)
+			this.numGuests = numGuests;
 	}
 }

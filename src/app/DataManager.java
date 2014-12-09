@@ -10,12 +10,12 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class DataManager implements ManagerInterface {
-	ArrayList<? extends ReservationInterface> reservations;
-	ArrayList<? extends GuestInterface> guests;
-	ArrayList<? extends RoomInterface> rooms;
+	public ArrayList<Reservation> reservations;
+	ArrayList<Guest> guests;
+	ArrayList<Room> rooms;
 
-	ArrayList<? extends RoomReservationInterface> roomReservations;
-	ArrayList<? extends GuestReservationInterface> guestReservations;
+	ArrayList<RoomReservation> roomReservations;
+	ArrayList<GuestReservation> guestReservations;
 
 	public DataManager() {
 		this.reservations = new ArrayList<Reservation>();
@@ -27,54 +27,54 @@ public class DataManager implements ManagerInterface {
 	}
 
 	@Override
-	public ArrayList<? extends ReservationInterface> getReservations() {
+	public ArrayList<Reservation> getReservations() {
 		return this.reservations;
 	}
 
 	@Override
-	public ArrayList<? extends GuestInterface> getGuests() {
+	public ArrayList<Guest> getGuests() {
 		return this.guests;
 	}
 
 	@Override
-	public ArrayList<? extends RoomInterface> getRooms() {
+	public ArrayList<Room> getRooms() {
 		return this.rooms;
 	}
 
 	@Override
-	public ArrayList<? extends RoomReservationInterface> getRoomReservations() {
+	public ArrayList<RoomReservation> getRoomReservations() {
 		return this.roomReservations;
 	}
 
 	@Override
-	public ArrayList<? extends GuestReservationInterface> getGuestReservations() {
+	public ArrayList<GuestReservation> getGuestReservations() {
 		return this.guestReservations;
 	}
 
 	@Override
-	public void setReservations(ArrayList<? extends ReservationInterface> reservations) {
+	public void setReservations(ArrayList<Reservation> reservations) {
 		this.reservations = reservations;
 	}
 
 	@Override
-	public void setGuests(ArrayList<? extends GuestInterface> guests) {
+	public void setGuests(ArrayList<Guest> guests) {
 		this.guests = guests;
 
 	}
 
 	@Override
-	public void setRooms(ArrayList<? extends RoomInterface> rooms) {
+	public void setRooms(ArrayList<Room> rooms) {
 		this.rooms = rooms;
 
 	}
 
 	@Override
-	public void setRoomReservations(ArrayList<? extends RoomReservationInterface> roomReservations) {
+	public void setRoomReservations(ArrayList<RoomReservation> roomReservations) {
 		this.roomReservations = roomReservations;
 	}
 
 	@Override
-	public void setGuestReservations(ArrayList<? extends GuestReservationInterface> guestReservations) {
+	public void setGuestReservations(ArrayList<GuestReservation> guestReservations) {
 		this.guestReservations = guestReservations;
 
 	}
@@ -104,14 +104,57 @@ public class DataManager implements ManagerInterface {
 	}
 
 	@Override
-	public void checkIfRoomFree(int roomId, Date checkInDate, Date checkOutDate) {
+	public boolean checkIfRoomFree(int roomId, Date checkInDate, Date checkOutDate) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public <T extends RoomReservationInterface> double getReservationPrice(T reservation) {
+	public double getReservationPrice(Reservation reservation) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+	
+	public void addRoom(Room room)
+	{
+		rooms.add(room);
+	}
+	public void addGuest(Guest guest)
+	{
+		guests.add(guest);
+	}
+	public void addReservation(Reservation reservation)
+	{
+		reservations.add(reservation);
+	}
+	public void addRoomReservation(RoomReservation roomReservation)
+	{
+		roomReservations.add(roomReservation);
+	}
+	public void addGuestReservation(GuestReservation guestReservation)
+	{
+		guestReservations.add(guestReservation);
+	}
+	
+	public Room getRoom(int index)
+	{
+		return rooms.get(index);
+	}
+	public Guest getGuest(int index)
+	{
+		return guests.get(index);
+	}
+	public Reservation getReservation(int index)
+	{
+		return reservations.get(index);
+	}
+	public RoomReservation getRoomReservation(int index)
+	{
+		return roomReservations.get(index);
+	}
+	public GuestReservation getGuestReservation(int index)
+	{
+		return guestReservations.get(index);
+	}
+	
 }
