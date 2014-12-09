@@ -66,7 +66,7 @@ public class DataManagerTest
 		m.addReservation(new Reservation(1, new Date(115, 1, 1), new Date(115, 1, 4)));
 		m.addReservation(new Reservation(2, new Date(115, 4, 27), new Date(115, 4, 30)));
 		m.addReservation(new Reservation(3, new Date(115, 6, 13), new Date(115, 6, 18)));
-		m.addReservation(new Reservation(4, new Date(115, 7, 9), new Date(115, 6, 13)));
+		m.addReservation(new Reservation(4, new Date(115, 7, 9), new Date(115, 7, 13)));
 		
 		//create the room reservations
 		m.addRoomReservation(new RoomReservation(101,1,1)); //(room_no, res_no, num_occupants)
@@ -171,6 +171,13 @@ public class DataManagerTest
 		Reservation res = m.getReservationById(1);
 		System.out.println(m.getReservationPrice(res));
 		assertTrue(301.5 == m.getReservationPrice(res));
+		
+		res = m.getReservationById(2);
+		assertEquals(420.00, m.getReservationPrice(res), 0);
+		res = m.getReservationById(4);
+		assertEquals(799.20, m.getReservationPrice(res), 0.0000000001);
+		//Doubles aren't always totally accurate...
+		
 	}
 	
 }

@@ -137,11 +137,13 @@ public class DataManager implements ManagerInterface {
 		int diffInDays = (int)( (reservation.getCheckOutDate().getTime() - reservation.getCheckInDate().getTime()) 
                 / (1000 * 60 * 60 * 24) );
 		
+		System.out.println(diffInDays);
+		
 		for(RoomReservation res: roomres){
 			Room room = getRoomByNumber(res.getRoomNumber());
 			double ppp = room.getRoomPricePerPerson();
-			int numG = res.getNumGuests();
-			rtn += ( ppp* numG * diffInDays);
+			int numGuests = res.getNumGuests();
+			rtn += ( ppp* numGuests * diffInDays);
 		}
 		
 		return rtn;
