@@ -88,11 +88,27 @@ public class DataManagerTest
 		room_id = 108;
 		assertTrue(m.checkIfRoomFree(room_id, check_in_date, check_in_date));
 		//room 108 has no reservations...
+		
+		room_id = 105;
+		check_in_date = new Date(115, 4, 30);
+		check_out_date = new Date(115, 5, 1);
+		assertTrue(m.checkIfRoomFree(room_id, check_in_date, check_out_date));
+		//Room 105 is booked between (115, 4, 27) and (115, 4, 30)
+		//So we're passing in a check in date that is equal to the checkout date
+		//in this case we should return the room as free!
+		
 	}
 	
 	public void testGetReservationPrice()
 	{
-		
+		Reservation r1 = m.getReservation(2);
+		//reservation with id of 1 is for the dates (115, 1, 1) - (115, 1, 4)
+		//so 3 nights. There are 2 reservations associated with r1
+		//see lines 36,37. 1 occupant in room 101 and 2 occupants in room 102
+		//ppp in room 101 is 50.50 and ppp in room 102 is 25.00
+		//(50.50*1)+(25*2) = 100.50 euro per night
+		//100.50*3 = 301.50
+		assertEquals(301.50, m.getReservationPrice(r1), 0);
 	}
 	
 }

@@ -19,7 +19,7 @@ public interface ManagerInterface
 	public abstract void editReservation();
 	public abstract void cancelReservation();
 	public abstract void newGuest();
-	public abstract void checkIfRoomFree(int roomId, Date checkInDate, Date checkOutDate);
+	public abstract boolean checkIfRoomFree(int roomId, Date checkInDate, Date checkOutDate);
 	public abstract double getReservationPrice(Reservation reservation);
 	
 }

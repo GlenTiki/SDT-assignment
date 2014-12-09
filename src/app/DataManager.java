@@ -106,7 +106,7 @@ public class DataManager implements ManagerInterface {
 	@Override
 	public boolean checkIfRoomFree(int roomId, Date checkInDate, Date checkOutDate) {
 		// TODO Auto-generated method stub
-
+		return false;
 	}
 
 	@Override
