@@ -1,25 +1,27 @@
 package tests;
-import app.*;
-import interfaces.GuestInterface;
-import interfaces.GuestReservationInterface;
-import interfaces.ManagerInterface;
-import interfaces.ReservationInterface;
-import interfaces.RoomInterface;
-import interfaces.RoomReservationInterface;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
-import java.util.ArrayList;
 import java.util.Date;
-import static org.junit.Assert.*;
+
+import org.junit.Before;
 import org.junit.Test;
 
 import app.DataManager;
+import app.Guest;
+import app.GuestReservation;
+import app.Reservation;
+import app.Room;
+import app.RoomReservation;
 
 
 public class DataManagerTest
 {
 	DataManager m;
 	
-	public DataManagerTest()
+	@Before
+	public void init()
 	{
 		m = new DataManager();
 		
@@ -81,43 +83,74 @@ public class DataManagerTest
 		
 	}
 	
+	@Test
 	public void testAddValidReservation()
 	{
 		Reservation newReservation = new Reservation(5, new Date(115, 2, 1), new Date(115, 2, 3));
 		RoomReservation newRoomReservation = new RoomReservation(101, 5, 2);
-		GuestReservation newGuestReservation = new GuestReservation(1, 5);
+		GuestReservation newGuestReservation = new GuestReservation(5, 1);
 		
-		m.addReservation(newReservation);
-		m.addRoomReservation(newRoomReservation);
-		m.addGuestReservation(newGuestReservation);
+		assertTrue(m.createFullReservation(newReservation, newGuestReservation.getGuestId(), new RoomReservation[]{newRoomReservation}));
 		
-		assertEquals(newReservation, m.getReservation(5));
+		assertEquals(newReservation, m.getReservationById(5));
 	}
 	
-	public void testAddInvalidReservation()
+	@Test
+	public void testAddInvalidReservationWithOverlappingDate()
 	{
 		Reservation newReservation = new Reservation(5, new Date(115, 1, 1), new Date(115, 1, 4));
 		RoomReservation newRoomReservation = new RoomReservation(101, 5, 2);
-		GuestReservation newGuestReservation = new GuestReservation(1, 5);
+		GuestReservation newGuestReservation = new GuestReservation(5, 1);
 		
 		assertFalse(m.createFullReservation(newReservation, newGuestReservation.getGuestId(), new RoomReservation[]{newRoomReservation}));
+		assertEquals(null, m.getReservationById(5));
 	}
 	
-	public void testEditReservation()
+	@Test
+	public void testEditReservationValidly()
 	{
+		Reservation newReservation = new Reservation(5, new Date(115, 2, 1), new Date(115, 2, 4));
+		RoomReservation newRoomReservation = new RoomReservation(101, 5, 2);
+		GuestReservation newGuestReservation = new GuestReservation(5, 1);
 		
+		assertTrue(m.createFullReservation(newReservation, newGuestReservation.getGuestId(), new RoomReservation[]{newRoomReservation}));
+		assertEquals(newReservation, m.getReservationById(5));
+		
+		Reservation editedReservation = new Reservation(5, new Date(115, 3, 1), new Date(115, 3, 4));
+		
+		assertTrue(m.editReservation(editedReservation, newGuestReservation.getGuestId(), new RoomReservation[]{newRoomReservation}));
+		assertEquals(editedReservation, m.getReservationById(5));
+	
 	}
 	
+	@Test
+	public void testEditReservationInvalidly()
+	{
+		Reservation newReservation = new Reservation(5, new Date(115, 2, 1), new Date(115, 2, 4));
+		RoomReservation newRoomReservation = new RoomReservation(101, 5, 2);
+		GuestReservation newGuestReservation = new GuestReservation(5, 1);
+		
+		assertTrue(m.createFullReservation(newReservation, newGuestReservation.getGuestId(), new RoomReservation[]{newRoomReservation}));
+		assertEquals(newReservation, m.getReservationById(5));
+		
+		Reservation editedReservation = new Reservation(5, new Date(115, 1, 1), new Date(115, 1, 4));
+		
+		assertFalse(m.editReservation(editedReservation, newGuestReservation.getGuestId(), new RoomReservation[]{newRoomReservation}));
+		assertTrue(editedReservation != m.getReservationById(5));
+		assertEquals(newReservation, m.getReservationById(5));
+	}
+	
+	@Test
 	public void testCancelReservation()
 	{
+		Reservation canceledReservation = m.getReservationById(1);
 		
+		m.cancelReservation(canceledReservation);
+		
+		assertEquals(null, m.getReservationById(1));
 	}
 	
-	public void testNewGuest()
-	{
-		
-	}
-	
+	@Test
 	public void testCheckIfRoomFree()
 	{
 		//                            (y,m,d)
@@ -132,9 +165,12 @@ public class DataManagerTest
 		//room 108 has no reservations...
 	}
 	
+	@Test
 	public void testGetReservationPrice()
 	{
-		
+		Reservation res = m.getReservationById(1);
+		System.out.println(m.getReservationPrice(res));
+		assertTrue(301.5 == m.getReservationPrice(res));
 	}
 	
 }

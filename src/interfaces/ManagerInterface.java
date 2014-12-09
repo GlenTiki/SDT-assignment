@@ -15,9 +15,7 @@ public interface ManagerInterface
 	public abstract void setRooms(ArrayList<Room> rooms);
 	public abstract void setRoomReservations(ArrayList<RoomReservation> roomReservations);
 	public abstract void setGuestReservations(ArrayList<GuestReservation> guestReservations);
-	public abstract void newReservation();
 	public abstract void cancelReservation(Reservation reservation);
-	public abstract void newGuest();
 	
 	//return true if room free for date
 	public abstract boolean checkIfRoomFree(int roomId, Date checkInDate, Date checkOutDate);

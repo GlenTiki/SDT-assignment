@@ -8,7 +8,7 @@ public class Room implements RoomInterface {
 	private double roomPricePerPerson;
 	private int roomNumber;
 
-	public Room(int roomCapacity, double roomPricePerPerson, int roomNumber) {
+	public Room(int roomNumber, double roomPricePerPerson, int roomCapacity) {
 		this.roomCapacity = roomCapacity;
 		this.roomPricePerPerson = roomPricePerPerson;
 		this.roomNumber = roomNumber;

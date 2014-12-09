@@ -1,20 +1,22 @@
 package tests;
 
 
-import interfaces.RoomInterface;
-import app.Room;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 import org.junit.Test;
+
+import app.Room;
 
 public class RoomTest
 {
-	RoomInterface r1;
-	RoomInterface r2;
+	Room r1;
+	Room r2;
 	
 	public RoomTest()
 	{
-		r1 = new Room(2, 99.99, 101);
-		r2 = new Room(4, 45.50, 104);
+		r1 = new Room(101, 99.99, 2);
+		r2 = new Room(104, 45.50, 4);
 	}
 	
 	@Test
