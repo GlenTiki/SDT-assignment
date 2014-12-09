@@ -1,79 +1,43 @@
 package app;
-import java.util.ArrayList;
+import interfaces.RoomInterface;
 
-public class Room {
+public class Room implements RoomInterface {
 
-	private ArrayList<Reservation> reservations;
 
-	private String name;
 	private int roomCapacity;
-	private int roomPricePerPerson;
+	private double roomPricePerPerson;
 	private int roomNumber;
 
-	public Room(String roomName, int roomCapacity, int roomPricePerPerson) {
-		this.name = roomName;
+	public Room(int roomNumber, double roomPricePerPerson, int roomCapacity) {
 		this.roomCapacity = roomCapacity;
 		this.roomPricePerPerson = roomPricePerPerson;
-		this.reservations = new ArrayList<Reservation>();
-		this.roomNumber = 0;
-	}
-
-	public void addReservation(Reservation reservation) {
-		reservations.add(reservation);
-	}
-
-	public void deleteReservation(Reservation reservation) {
-		reservations.remove(reservation);
-	}
-
-	public ArrayList<Reservation> getReservations() {
-		return reservations;
-	}
-
-	public void setRoomNumber(int number) {
-		this.roomNumber = number;
+		this.roomNumber = roomNumber;
 	}
 
 	public int getRoomNumber() {
 		return this.roomNumber;
 	}
 	
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
 
 	public int getRoomCapacity() {
 		return roomCapacity;
 	}
 
 	public void setRoomCapacity(int roomCapacity) {
-		this.roomCapacity = roomCapacity;
+		if (roomCapacity > 0)
+			this.roomCapacity = roomCapacity;
 	}
 
-	public int getRoomPricePerPerson() {
+	public double getRoomPricePerPerson() {
 		return roomPricePerPerson;
 	}
 
-	public void setRoomPricePerPerson(int roomPricePerPerson) {
-		this.roomPricePerPerson = roomPricePerPerson;
-	}
-
-	public void setReservations(ArrayList<Reservation> reservations) {
-		this.reservations = reservations;
-	}
-
-	public void delete() {
-		for (int i = reservations.size(); i >= 0; i--) {
-			Reservation res = reservations.get(i);
-			res.deleteReservation();
-		}
+	public void setRoomPricePerPerson(double roomPricePerPerson) {
+		if (roomPricePerPerson > 0)
+			this.roomPricePerPerson = roomPricePerPerson;
 	}
 
 	public String toString(){
-		return super.toString() + " " + roomNumber + ": " + name + ". Can hold: " + roomCapacity + ". Price per person sharing: " + roomPricePerPerson;
+		return "Room Number: " + roomNumber + "\nCan hold: " + roomCapacity + "\nPrice per person sharing: " + roomPricePerPerson;
 	}
 }

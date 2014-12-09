@@ -7,7 +7,6 @@ public interface GuestInterface
 	public abstract String getPhoneNumber();
 	public abstract String getAddress();
 	public abstract String getEmail();
-	public abstract void setId(int newID);
 	public abstract void setName(String newName);
 	public abstract void setPhoneNumber(String newPhoneNumber);
 	public abstract void setAddress(String newAddress);
